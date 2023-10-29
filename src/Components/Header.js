@@ -1,11 +1,12 @@
 import React from 'react';
+import Countdown from "./Countdown";
 
-const Header = () => {
+const Header = ({isGameOn}) => {
     return (
-        <div className="header">
-            <h1>The Great Memory Game</h1>
-            <span className="countdown hidden"></span>
-        </div>
+        <header className="header">
+            {isGameOn ? <h1 style={{fontSize: "2.5rem"}}>You have 15 seconds to remeber all the animals!</h1> : <h1>The Great Memory Game</h1>}
+            <Countdown/>
+        </header>
     );
 };
 
