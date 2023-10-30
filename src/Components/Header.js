@@ -1,11 +1,20 @@
-import React from 'react';
 import Countdown from "./Countdown";
+import Instructions from "./Instructions";
+import Title from "./Title";
+import Result from "./Result";
+import InstructionAddAnimals from "./InstructionAddAnimals";
 
-const Header = ({isGameOn}) => {
+const Header = ({isGameOn, showCountdown, showHeading, showResult, limitForRemembering}) => {
+
     return (
         <header className="header">
-            {isGameOn ? <h1 style={{fontSize: "2.5rem"}}>You have 15 seconds to remeber all the animals!</h1> : <h1>The Great Memory Game</h1>}
-            <Countdown/>
+            {showResult && <Result/>}
+            {showHeading && (isGameOn ? <Instructions limitForRemembering={limitForRemembering}/> : <Title/>)}
+            {showCountdown &&
+                <>
+                <InstructionAddAnimals/>
+                <Countdown/>
+                </>}
         </header>
     );
 };
