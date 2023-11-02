@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import GridRow from "./GridRow";
 
-const Grid = ({data, animalsToRemember}) => {
+
+const Grid = ({animalsToRemember}) => {
 
     // todo: setting value based on game stage
     return (

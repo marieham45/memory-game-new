@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Keyboard = ({data}) => {
+const Keyboard = ({data, setKeyboardValue}) => {
 
     return (
         <div className="keyboard">
             {data.map(animal => {
                 const {id, image} = animal
-                return <button key={id}>{image}</button>
+                return <button onClick={() => setKeyboardValue(image)} key={id}>{image}</button>
             })}
         </div>
     );
