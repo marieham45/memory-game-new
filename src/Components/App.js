@@ -13,15 +13,28 @@ const App = () => {
   const [showCountdown, setShowCountdown] = useState(false)
   const [showHeading, setShowHeading] = useState(true)
   const [showResult, setShowResult] = useState(false)
+  const [animalsToRemember, setAnimalsToRemember] = useState([])
+  const [showAnimalsToRemember, setShowAnimalsToRemember] = useState(false)
 
 
 
   const handleGameStart = () => {
     setGameOn(true)
+    setShowAnimalsToRemember(true)
+    setAnimalsToRemember(a => {
+      const animalsToRemember = []
+      for (let i = 0; i < 9; i++) {
+        animalsToRemember.push(animals[Math.floor(Math.random() * animals.length)].image)
+      }
+
+      return animalsToRemember
+    })
 
     setTimeout( () => {
       setShowCountdown(true);
       setShowHeading(false);
+      setShowAnimalsToRemember(false)
+
 
       setTimeout(() => handleResult(), 10000)
     }, limitForRemembering * 1000);
@@ -43,7 +56,7 @@ const App = () => {
 
   return <div className="app">
     <Header isGameOn={isGameOn} showCountdown={showCountdown} showHeading={showHeading} showResult={showResult} limitForRemembering={limitForRemembering}/>
-    <Grid/>
+    <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>
     {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
     {showCountdown && <Keyboard data={animals}/>}
     {showCountdown && <ResultButton onResult={handleResult}/>}

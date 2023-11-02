@@ -45,9 +45,7 @@ body {
 
 /* MRIZKA */
 
-.grid_assigned,
-.grid_player,
-.grid_result {
+.grid {
     display: grid;
     grid-template-rows: 100px 100px 100px;
     gap: 5px;
@@ -63,9 +61,7 @@ body {
     gap: 5px;
 }
 
-.grid_assigned_field,
-.grid_player_field,
-.grid_result_field {
+.grid_field {
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -196,8 +192,6 @@ body {
 .red {
     background-color: crimson;
 }
-
-
 
 
 /* KEYBOARD */
