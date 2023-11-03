@@ -1,24 +1,21 @@
-
-
 const Grid = ({animalsToRemember}) => {
 
-    // todo: setting value based on game stage
     return (
         <div className="grid">
             <div className="row">
-                <input value={animalsToRemember[0]} className="grid_field"></input>
-                <input value={animalsToRemember[1]} className="grid_field"></input>
-                <input value={animalsToRemember[2]} className="grid_field"></input>
+                <div className="grid_field">{animalsToRemember[0]}</div>
+                <div className="grid_field">{animalsToRemember[1]}</div>
+                <div className="grid_field">{animalsToRemember[2]}</div>
             </div>
             <div className="row">
-                <input value={animalsToRemember[3]} className="grid_field"></input>
-                <input value={animalsToRemember[4]} className="grid_field"></input>
-                <input value={animalsToRemember[5]} className="grid_field"></input>
+                <div className="grid_field">{animalsToRemember[3]}</div>
+                <div className="grid_field">{animalsToRemember[4]}</div>
+                <div className="grid_field">{animalsToRemember[5]}</div>
             </div>
             <div className="row">
-                <input value={animalsToRemember[6]} className="grid_field"></input>
-                <input value={animalsToRemember[7]} className="grid_field"></input>
-                <input value={animalsToRemember[8]} className="grid_field"></input>
+                <div className="grid_field">{animalsToRemember[6]}</div>
+                <div className="grid_field">{animalsToRemember[7]}</div>
+                <div className="grid_field">{animalsToRemember[8]}</div>
             </div>
 
         </div>

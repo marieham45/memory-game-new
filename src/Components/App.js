@@ -7,6 +7,7 @@ import Keyboard from "./Keyboard";
 import ResultButton from "./ResultButton";
 import ResetButton from "./ResetButton";
 import GridPlayer from "./GridPlayer";
+import GridResult from "./GridResult";
 
 const App = () => {
   const limitForRemembering = 5;
@@ -17,6 +18,7 @@ const App = () => {
   const [animalsToRemember, setAnimalsToRemember] = useState([])
   const [showAnimalsToRemember, setShowAnimalsToRemember] = useState(false)
   const [keyboardValue, setKeyboardValue] = useState("")
+  const [playerInput, setPlayerInput] = useState([])
 
 
 
@@ -43,10 +45,6 @@ const App = () => {
 
   }
 
-  // const handleKeySelect = () => {
-  //
-  // }
-
   const handleResult = () => {
     setShowResult(true)
     setShowCountdown(false)
@@ -58,12 +56,15 @@ const App = () => {
     setShowCountdown(false)
     setShowHeading(true)
     setShowResult(false)
+    setAnimalsToRemember([])
+    setPlayerInput([])
   }
 
   return <div className="app">
     <Header isGameOn={isGameOn} showCountdown={showCountdown} showHeading={showHeading} showResult={showResult} limitForRemembering={limitForRemembering}/>
-    <GridPlayer keyboardValue={keyboardValue}/>
-    {/*<Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>*/}
+    {(!showCountdown && !showResult) && <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
+    {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
+    {(!showCountdown && showResult) && <GridResult/>}
     {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
     {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
     {showCountdown && <ResultButton onResult={handleResult}/>}
