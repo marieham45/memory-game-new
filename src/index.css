@@ -188,10 +188,20 @@ body {
     -webkit-filter: grayscale(100%);
     /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
+    transition: transform 0.25s
+}
+
+.gray:active {
+    transform: rotateY(360deg);
 }
 
 .red {
     background-color: crimson;
+    transition: transform 0.25s;
+}
+
+.red:active {
+    transform: rotateY(360deg);
 }
 
 

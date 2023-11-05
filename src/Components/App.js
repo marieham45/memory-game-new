@@ -95,7 +95,7 @@ const App = () => {
         {(!showCountdown && !showResult) &&
             <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
         {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
-        {(!showCountdown && showResult) && <GridResult resultAnimals={resultAnimals}/>}
+        {(!showCountdown && showResult) && <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>}
         {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
         {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
         {showCountdown && <ResultButton onResult={handleResult}/>}
