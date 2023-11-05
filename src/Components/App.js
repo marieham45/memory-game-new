@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {animals} from "../Data";
 import Header from "./Header";
 import Grid from "./Grid";
@@ -10,66 +10,97 @@ import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
 
 const App = () => {
-  const limitForRemembering = 5;
-  const [isGameOn, setGameOn] = useState(false)
-  const [showCountdown, setShowCountdown] = useState(false)
-  const [showHeading, setShowHeading] = useState(true)
-  const [showResult, setShowResult] = useState(false)
-  const [animalsToRemember, setAnimalsToRemember] = useState([])
-  const [showAnimalsToRemember, setShowAnimalsToRemember] = useState(false)
-  const [keyboardValue, setKeyboardValue] = useState("")
-  const [playerInput, setPlayerInput] = useState([])
+    const limitForRemembering = 5;
+    const limitForPlayerInput = 10;
 
+    const [isGameOn, setGameOn] = useState(false);
+    const [showCountdown, setShowCountdown] = useState(false);
+    const [showHeading, setShowHeading] = useState(true);
+    const [showResult, setShowResult] = useState(false);
+    const [animalsToRemember, setAnimalsToRemember] = useState([]);
+    const [showAnimalsToRemember, setShowAnimalsToRemember] = useState(false);
+    const [keyboardValue, setKeyboardValue] = useState("");
+    const [playerInput, setPlayerInput] = useState([]);
+    const [resultAnimals, setResultAnimals] = useState([]);
 
+    const timeoutRef = useRef(null);
+    const playerInputRef = useRef(playerInput);
 
-  const handleGameStart = () => {
-    setGameOn(true)
-    setShowAnimalsToRemember(true)
-    setAnimalsToRemember(a => {
-      const animalsToRemember = []
-      for (let i = 0; i < 9; i++) {
-        animalsToRemember.push(animals[Math.floor(Math.random() * animals.length)].image)
-      }
+    const handleGameStart = () => {
+        setGameOn(true);
+        setShowAnimalsToRemember(true);
+        setAnimalsToRemember(a => {
+            const animalsToRemember = [];
+            for (let i = 0; i < 9; i++) {
+                animalsToRemember.push(animals[Math.floor(Math.random() * animals.length)].image);
+            }
+            return animalsToRemember;
+        });
 
-      return animalsToRemember
-    })
+        setTimeout(() => {
+            setShowCountdown(true);
+            setShowHeading(false);
+            setShowAnimalsToRemember(false);
+        }, limitForRemembering * 1000);
+    }
 
-    setTimeout( () => {
-      setShowCountdown(true);
-      setShowHeading(false);
-      setShowAnimalsToRemember(false)
+    useEffect(() => {
+        if (showCountdown) {
+            timeoutRef.current = setTimeout(() => {
+                handleResult();
+                timeoutRef.current = null;
+            }, limitForPlayerInput * 1000);
+        } else {
+            // Clear the timeout if showCountdown becomes false
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+                timeoutRef.current = null;
+            }
+        }
+    }, [showCountdown]);
 
+    const handleResult = () => {
+        setShowResult(true);
+        setShowCountdown(false);
 
-      setTimeout(() => handleResult(), 10000)
-    }, limitForRemembering * 1000);
+        // Access playerInput from the ref
+        const currentPlayerInput = playerInputRef.current;
+        const result = animalsToRemember.map((animal, i) => {
+            const state = animal === currentPlayerInput[i] ? "correct" : "incorrect";
+            return { image: animal, state };
+        });
+        setResultAnimals(result);
+    }
 
-  }
+    const handleReset = () => {
+        setGameOn(false);
+        setShowCountdown(false);
+        setShowHeading(true);
+        setShowResult(false);
+        setShowAnimalsToRemember(false)
+        setAnimalsToRemember([]);
+        setPlayerInput([]);
+        setKeyboardValue("")
+        setResultAnimals([]);
+    }
 
-  const handleResult = () => {
-    setShowResult(true)
-    setShowCountdown(false)
+    // Update the playerInputRef when playerInput changes
+    useEffect(() => {
+        playerInputRef.current = playerInput;
+    }, [playerInput]);
 
-  }
-
-  const handleReset = () => {
-    setGameOn(false)
-    setShowCountdown(false)
-    setShowHeading(true)
-    setShowResult(false)
-    setAnimalsToRemember([])
-    setPlayerInput([])
-  }
-
-  return <div className="app">
-    <Header isGameOn={isGameOn} showCountdown={showCountdown} showHeading={showHeading} showResult={showResult} limitForRemembering={limitForRemembering}/>
-    {(!showCountdown && !showResult) && <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
-    {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
-    {(!showCountdown && showResult) && <GridResult/>}
-    {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
-    {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
-    {showCountdown && <ResultButton onResult={handleResult}/>}
-    {showResult && <ResetButton onReset={handleReset}/>}
-  </div>;
+    return <div className="app">
+        <Header isGameOn={isGameOn} showCountdown={showCountdown} showHeading={showHeading} showResult={showResult}
+                limitForRemembering={limitForRemembering}/>
+        {(!showCountdown && !showResult) &&
+            <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
+        {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
+        {(!showCountdown && showResult) && <GridResult resultAnimals={resultAnimals}/>}
+        {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
+        {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
+        {showCountdown && <ResultButton onResult={handleResult}/>}
+        {showResult && <ResetButton onReset={handleReset}/>}
+    </div>;
 };
 
 export default App;
