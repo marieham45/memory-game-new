@@ -264,6 +264,25 @@ body {
     margin-left: 10%;
 }
 
+.loser {
+    color: crimson;
+}
+.good_effort {
+    color: #FF731D;
+}
+
+.well_done {
+    color: #3D8361;
+}
+
+.nearly_perfect {
+    color: #874C62;
+}
+
+.unbelievable {
+    color: goldenrod;
+}
+
 
 /* SKRYVANI */
 

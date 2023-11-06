@@ -8,10 +8,11 @@ import ResultButton from "./ResultButton";
 import ResetButton from "./ResetButton";
 import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
+import Verdict from "./Verdict";
 
 const App = () => {
-    const limitForRemembering = 5;
-    const limitForPlayerInput = 10;
+    const limitForRemembering = 10;
+    const limitForPlayerInput = 20;
 
     const [isGameOn, setGameOn] = useState(false);
     const [showCountdown, setShowCountdown] = useState(false);
@@ -22,6 +23,8 @@ const App = () => {
     const [keyboardValue, setKeyboardValue] = useState("");
     const [playerInput, setPlayerInput] = useState([]);
     const [resultAnimals, setResultAnimals] = useState([]);
+    const [skillEvaluation, setSkillEvaluation] = useState("")
+    const [correctCount, setCorrectCount] = useState(0)
 
     const timeoutRef = useRef(null);
     const playerInputRef = useRef(playerInput);
@@ -70,6 +73,34 @@ const App = () => {
             return { image: animal, state };
         });
         setResultAnimals(result);
+
+        const correctCount = result.filter(item => item.state === "correct").length
+        setCorrectCount(correctCount)
+
+        switch (correctCount) {
+            case 0:
+                setSkillEvaluation("Loser!");
+                break;
+            case 1:
+            case 2:
+            case 3:
+                setSkillEvaluation("Good effort!");
+                break;
+            case 4:
+            case 5:
+            case 6:
+                setSkillEvaluation("Well done!");
+                break;
+            case 7:
+            case 8:
+                setSkillEvaluation("Nearly perfect!");
+                break;
+            case 9:
+                setSkillEvaluation("Unbelievable!");
+                break;
+            default:
+                setSkillEvaluation("Something went wrong...");
+        }
     }
 
     const handleReset = () => {
@@ -82,6 +113,8 @@ const App = () => {
         setPlayerInput([]);
         setKeyboardValue("")
         setResultAnimals([]);
+        setSkillEvaluation("")
+        setCorrectCount(0)
     }
 
     // Update the playerInputRef when playerInput changes
@@ -90,8 +123,8 @@ const App = () => {
     }, [playerInput]);
 
     return <div className="app">
-        <Header isGameOn={isGameOn} showCountdown={showCountdown} showHeading={showHeading} showResult={showResult}
-                limitForRemembering={limitForRemembering}/>
+        <Header isGameOn={isGameOn} showCountdown={showCountdown} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
+                limitForRemembering={limitForRemembering} skillEvaluation={skillEvaluation}/>
         {(!showCountdown && !showResult) &&
             <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
         {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
@@ -99,7 +132,11 @@ const App = () => {
         {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
         {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
         {showCountdown && <ResultButton onResult={handleResult}/>}
-        {showResult && <ResetButton onReset={handleReset}/>}
+        {showResult &&
+            <>
+            <Verdict correctCount={correctCount}/>
+            <ResetButton onReset={handleReset}/>
+            </>}
     </div>;
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Result = () => {
+const Result = ({skillEvaluation}) => {
     return (
         <h1>
-            Result
+            {skillEvaluation}
         </h1>
     );
 };
