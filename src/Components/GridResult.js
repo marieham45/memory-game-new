@@ -13,7 +13,6 @@ const GridResult = ({resultAnimals, playerInput}) => {
 
     return (
         <div className="grid">
-            <div className="row">
                 <div
                     className={`grid_field ${resultAnimals[0].state === "correct" ? "green" : showOriginalInput1 ? "red" : "gray"}`}
                     onClick={
@@ -32,8 +31,7 @@ const GridResult = ({resultAnimals, playerInput}) => {
                         () => {
                             if (resultAnimals[2].state === "incorrect") setShowOriginalInput3(!showOriginalInput3)
                         }}>{showOriginalInput3 ? playerInput[2] : resultAnimals[2].image}</div>
-            </div>
-            <div className="row">
+
                 <div
                     className={`grid_field ${resultAnimals[3].state === "correct" ? "green" : showOriginalInput4 ? "red" : "gray"}`}
                     onClick={
@@ -52,8 +50,7 @@ const GridResult = ({resultAnimals, playerInput}) => {
                         () => {
                             if (resultAnimals[5].state === "incorrect") setShowOriginalInput6(!showOriginalInput6)
                         }}>{showOriginalInput6 ? playerInput[5] : resultAnimals[5].image}</div>
-            </div>
-            <div className="row">
+
                 <div
                     className={`grid_field ${resultAnimals[6].state === "correct" ? "green" : showOriginalInput7 ? "red" : "gray"}`}
                     onClick={
@@ -72,7 +69,6 @@ const GridResult = ({resultAnimals, playerInput}) => {
                         () => {
                             if (resultAnimals[8].state === "incorrect") setShowOriginalInput9(!showOriginalInput9)
                         }}>{showOriginalInput9 ? playerInput[8] : resultAnimals[8].image}</div>
-            </div>
 
         </div>
     );

@@ -9,6 +9,7 @@ import ResetButton from "./ResetButton";
 import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
 import Verdict from "./Verdict";
+import Penguin from "./Penguin";
 
 const App = () => {
     const limitForRemembering = 10;
@@ -32,7 +33,7 @@ const App = () => {
     const handleGameStart = () => {
         setGameOn(true);
         setShowAnimalsToRemember(true);
-        setAnimalsToRemember(a => {
+        setAnimalsToRemember(() => {
             const animalsToRemember = [];
             for (let i = 0; i < 9; i++) {
                 animalsToRemember.push(animals[Math.floor(Math.random() * animals.length)].image);
@@ -125,6 +126,7 @@ const App = () => {
     return <div className="app">
         <Header isGameOn={isGameOn} showCountdown={showCountdown} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
                 limitForRemembering={limitForRemembering} skillEvaluation={skillEvaluation}/>
+        {!isGameOn && <Penguin/>}
         {(!showCountdown && !showResult) &&
             <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
         {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
