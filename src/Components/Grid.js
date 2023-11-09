@@ -4,7 +4,7 @@ const Grid = ({animalsToRemember}) => {
 
     return (
         <div className="grid">
-            {animalsToRemember.map(animal => <GridField>{animal}</GridField>)}
+            {animalsToRemember.map((animal, i) => <GridField key={i}>{animal}</GridField>)}
         </div>
     );
 };

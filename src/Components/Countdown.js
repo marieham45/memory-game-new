@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
 const Countdown = ({limitForPlayerInput}) => {
-    const [limit, setLimit] = useState(limitForPlayerInput)
+    const [limit, setLimit] = useState(limitForPlayerInput - 5)
 
 
     useEffect(() => {

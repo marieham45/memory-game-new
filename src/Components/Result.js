@@ -2,7 +2,7 @@ import React from 'react';
 
 const Result = ({skillEvaluation}) => {
     return (
-        <h1>
+        <h1 className="result">
             {skillEvaluation}
         </h1>
     );

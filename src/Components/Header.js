@@ -3,8 +3,10 @@ import Instructions from "./Instructions";
 import Title from "./Title";
 import Result from "./Result";
 import InstructionAddAnimals from "./InstructionAddAnimals";
+import {useEffect, useState} from "react";
 
-const Header = ({isGameOn, showCountdown, limitForPlayerInput, showHeading, showResult, limitForRemembering, skillEvaluation}) => {
+const Header = ({isGameOn, showGameRules, limitForPlayerInput, showHeading, showResult, limitForRemembering, skillEvaluation}) => {
+const [showCountDown, setShowCountDown] = useState(false)
 
     let skillEvaluationColorClassName = ""
     switch(skillEvaluation) {
@@ -25,15 +27,30 @@ const Header = ({isGameOn, showCountdown, limitForPlayerInput, showHeading, show
             break;
     }
 
+   useEffect(() => {
+       if (showGameRules) {
+           const timer = setTimeout(() => {
+                   setShowCountDown(true)
+               }, 5000
+           )
+           return () => {
+               clearTimeout(timer);
+               setShowCountDown(false)
+           }
+       }
+
+
+   }, [showGameRules])
+
     return (
         <header className={`header ${skillEvaluationColorClassName && skillEvaluationColorClassName}`}>
             {showResult && <Result skillEvaluation={skillEvaluation}/>}
-            {showHeading && (isGameOn ? <Instructions limitForRemembering={limitForRemembering}/> : <Title/>)}
-            {showCountdown &&
-                <>
-                <InstructionAddAnimals/>
-                <Countdown limitForPlayerInput={limitForPlayerInput} />
-                </>}
+            {showHeading && !isGameOn && <Title/>}
+            {showGameRules &&
+                <div className="game_rules">
+                    {!showCountDown && <InstructionAddAnimals/>}
+                    {showCountDown && <Countdown limitForPlayerInput={limitForPlayerInput}/>}
+                </div>}
         </header>
     );
 };

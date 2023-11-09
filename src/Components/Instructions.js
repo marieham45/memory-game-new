@@ -2,8 +2,8 @@ import React from 'react';
 
 const Instructions = ({limitForRemembering}) => {
     return (
-        <h1 style={{fontSize: "2.5rem"}}>
-            You have {limitForRemembering} seconds to remeber all the animals!
+        <h1 className="instructions">
+            You have {limitForRemembering} seconds to remeber <br/>all the animals!
         </h1>
     );
 };

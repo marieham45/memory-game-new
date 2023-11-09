@@ -10,13 +10,15 @@ import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
 import Verdict from "./Verdict";
 import Penguin from "./Penguin";
+import Instructions from "./Instructions";
+import Title from "./Title";
 
 const App = () => {
     const limitForRemembering = 10;
     const limitForPlayerInput = 20;
 
     const [isGameOn, setGameOn] = useState(false);
-    const [showCountdown, setShowCountdown] = useState(false);
+    const [showGameRules, setShowGameRules] = useState(false);
     const [showHeading, setShowHeading] = useState(true);
     const [showResult, setShowResult] = useState(false);
     const [animalsToRemember, setAnimalsToRemember] = useState([]);
@@ -42,30 +44,30 @@ const App = () => {
         });
 
         setTimeout(() => {
-            setShowCountdown(true);
+            setShowGameRules(true);
             setShowHeading(false);
             setShowAnimalsToRemember(false);
         }, limitForRemembering * 1000);
     }
 
     useEffect(() => {
-        if (showCountdown) {
+        if (showGameRules) {
             timeoutRef.current = setTimeout(() => {
                 handleResult();
                 timeoutRef.current = null;
             }, limitForPlayerInput * 1000);
         } else {
-            // Clear the timeout if showCountdown becomes false
+            // Clear the timeout if showGameRules becomes false
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
                 timeoutRef.current = null;
             }
         }
-    }, [showCountdown]);
+    }, [showGameRules]);
 
     const handleResult = () => {
         setShowResult(true);
-        setShowCountdown(false);
+        setShowGameRules(false);
 
         // Access playerInput from the ref
         const currentPlayerInput = playerInputRef.current;
@@ -106,7 +108,7 @@ const App = () => {
 
     const handleReset = () => {
         setGameOn(false);
-        setShowCountdown(false);
+        setShowGameRules(false);
         setShowHeading(true);
         setShowResult(false);
         setShowAnimalsToRemember(false)
@@ -124,16 +126,17 @@ const App = () => {
     }, [playerInput]);
 
     return <div className="app">
-        <Header isGameOn={isGameOn} showCountdown={showCountdown} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
+        <Header isGameOn={isGameOn} showGameRules={showGameRules} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
                 limitForRemembering={limitForRemembering} skillEvaluation={skillEvaluation}/>
         {!isGameOn && <Penguin/>}
-        {(!showCountdown && !showResult) &&
+        {(!showGameRules && !showResult) &&
             <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
-        {showCountdown && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
-        {(!showCountdown && showResult) && <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>}
+        {showGameRules && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
+        {(!showGameRules && showResult) && <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>}
         {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
-        {showCountdown && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
-        {showCountdown && <ResultButton onResult={handleResult}/>}
+        {showHeading && isGameOn && <Instructions limitForRemembering={limitForRemembering}/>}
+        {showGameRules && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
+        {showGameRules && <ResultButton onResult={handleResult}/>}
         {showResult &&
             <>
             <Verdict correctCount={correctCount}/>
