@@ -22,6 +22,24 @@ body {
     text-align: center;
 }
 
+.home_screen {
+    text-align: center;
+}
+
+.home_screen_button {
+    display: block;
+    font-size: 30px;
+    margin: 150px auto;
+    padding: 10px;
+    width: 200px;
+}
+
+.rules {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 30px;
+}
+
 /* PENGUIN */
 
 .penguin {
@@ -275,6 +293,7 @@ body {
 .loser {
     color: crimson;
 }
+
 .good_effort {
     color: #FF731D;
 }
