@@ -129,20 +129,22 @@ const App = () => {
         playerInputRef.current = playerInput;
     }, [playerInput]);
 
+    const handleGoToGame = () => {
+        setShowHomeScreen(false)
+        setShowRules(false)
+    }
     return <div className="app">
-        {showHomeScreen && !showRules && <HomeScreen setShowHomeScreen={() => setShowHomeScreen(false)} setShowRules={() => setShowRules(true)}/>}
-        {showRules && <Rules/>}
+        {showHomeScreen && !showRules && <HomeScreen onGoToGame={handleGoToGame} setShowRules={() => setShowRules(true)}/>}
+        {showRules && <Rules limitForRemembering={limitForRemembering} onGoToGame={handleGoToGame}/>}
         {!showHomeScreen && !showRules &&
         <>
             <Header isGameOn={isGameOn} showGameRules={showGameRules} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
                     limitForRemembering={limitForRemembering} skillEvaluation={skillEvaluation}/>
-            {!isGameOn && <Penguin/>}
             {(!showGameRules && !showResult) &&
                 <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
             {showGameRules && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
             {(!showGameRules && showResult) && <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>}
             {!isGameOn && <StartButton onGameStart={handleGameStart}/>}
-            {showHeading && isGameOn && <Instructions limitForRemembering={limitForRemembering}/>}
             {showGameRules && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
             {showGameRules && <ResultButton onResult={handleResult}/>}
             {showResult &&

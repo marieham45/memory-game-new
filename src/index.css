@@ -28,14 +28,14 @@ body {
 
 .home_screen_button {
     display: block;
-    font-size: 30px;
-    margin: 150px auto;
+    font-size: 20px;
+    margin: 70px auto;
     padding: 10px;
     width: 200px;
 }
 
 .rules {
-    margin-top: 200px;
+    margin-top: 120px;
     text-align: center;
     font-size: 30px;
 }
@@ -43,9 +43,9 @@ body {
 /* PENGUIN */
 
 .penguin {
-    font-size: 150px;
+    font-size: 100px;
     animation: hop 0.5s ease-in-out infinite alternate;
-    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 @keyframes hop {
@@ -217,22 +217,21 @@ body {
 
 .gray {
     -webkit-filter: grayscale(100%);
-    /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
-    transition: transform 0.25s
+    transition: transform 0.25s ease-in-out;
 }
 
 .gray:active {
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
 }
 
 .red {
     background-color: crimson;
-    transition: transform 0.25s;
+    transition: transform 0.25s ease-in-out;
 }
 
 .red:active {
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
 }
 
 
@@ -345,10 +344,6 @@ body {
 
     .game_rules {
         height: 60px;
-    }
-
-    .instructionAnimals {
-        font-size: 1.6rem;
     }
 
     .countdown {

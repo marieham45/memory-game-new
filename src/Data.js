@@ -9,15 +9,15 @@ export const animals = [
     },
     {
         id: 3,
-        image: "🦏"
+        image: "🦭"
     },
     {
         id: 4,
-        image: "🐈"
+        image: "🐅"
     },
     {
         id: 5,
-        image: "🐫"
+        image: "🐒"
     },
     {
         id: 6,
@@ -57,6 +57,6 @@ export const animals = [
     },
     {
         id: 15,
-        image: "🦓"
+        image: "🐢"
     }
 ];

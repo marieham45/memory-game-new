@@ -1,9 +1,13 @@
+import Title from "./Title";
+import Penguin from "./Penguin";
 
-const HomeScreen = ({setShowHomeScreen, setShowRules}) => {
+const HomeScreen = ({onGoToGame, setShowRules}) => {
     return (
         <div className=".home_screen">
-            <button className="home_screen_button" onClick={setShowRules}>What are the rules?</button>
-            <button className="home_screen_button" onClick={setShowHomeScreen}>Take me to the game!</button>
+            <Title/>
+            <Penguin/>
+            <button className="home_screen_button" onClick={setShowRules}>What are <br/> the rules?</button>
+            <button className="home_screen_button" onClick={onGoToGame}>Take me to <br/> the game!</button>
         </div>
     );
 };
