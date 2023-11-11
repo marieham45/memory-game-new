@@ -4,14 +4,16 @@ import Rules from "./Rules";
 import {useState} from "react";
 import Levels from "./Levels";
 
-const HomeScreen = () => {
+const HomeScreen = ({setLimitForRemembering, limitForRemembering, setLimitForPlayerInput, limitForPlayerInput, onGameStart, onReturn}) => {
     const [showRules, setShowRules] = useState(false)
-    const [showLevels, setShowLevels] = useState(false)
+    const [showLevels, setShowLevels] = useState(onReturn)
 
     const handleGoToGame = () => {
         setShowLevels(true)
         setShowRules(false)
     }
+
+
 
     return (
         <div className=".home_screen">
@@ -24,7 +26,10 @@ const HomeScreen = () => {
                 </>
             }
             {!showRules && showLevels &&
-                <Levels/>
+                <Levels setLimitForRemembering={setLimitForRemembering} limitForRemembering={limitForRemembering}
+                        setLimitForPlayerInput={setLimitForPlayerInput} limitForPlayerInput={limitForPlayerInput}
+                        onGameStart={onGameStart}
+                />
             }
             {showRules && <Rules onGoToGame={handleGoToGame}/>}
         </div>

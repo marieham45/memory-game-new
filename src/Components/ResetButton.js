@@ -1,10 +1,19 @@
 import React from 'react';
 
-const ResetButton = ({onReset}) => {
+const ResetButton = ({setShowGameRestartOptions, onReset}) => {
     return (
-        <button className="reset_btn" onClick={onReset}>
-            Try again!
-        </button>
+        <div>
+            <button className="reset_btn" onClick={() => setShowGameRestartOptions(true)}>
+                Try again!
+            </button>
+            <button className="reset_btn" onClick={onReset}>
+                Back to homepage
+            </button>
+
+            
+
+        </div>
+
     );
 };
 
