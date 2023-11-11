@@ -34,8 +34,20 @@ body {
     width: 200px;
 }
 
+.level_button {
+    display: block;
+    font-size: 20px;
+    margin: 50px auto;
+    padding: 10px;
+    width: 200px;
+}
+
+.level_button:focus {
+    background-color: #874c62;
+}
+
 .rules {
-    margin-top: 120px;
+    margin-top: 80px;
     text-align: center;
     font-size: 30px;
 }
@@ -69,8 +81,9 @@ body {
 }
 
 .instructions {
-    margin-top: 40px;
-    font-size: 1.6rem;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.4rem;
 }
 
 .instructionAnimals {
@@ -339,7 +352,7 @@ body {
     }
 
     .instructions {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .game_rules {

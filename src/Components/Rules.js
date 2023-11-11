@@ -1,13 +1,32 @@
 import React from 'react';
-import InstructionAddAnimals from "./InstructionAddAnimals";
-import Instructions from "./Instructions";
 
-const Rules = ({limitForRemembering, onGoToGame}) => { // todo change to slider with 3 steps, show the button only at the end
+const instructions = [
+    {
+        id: 0,
+        text: "Select your level."
+    },
+    {
+        id: 1,
+        text: "Click the start button to launch the game."
+    },
+    {
+        id: 2,
+        text: "Try to remember as many animals as possible within the given time limit."
+    },
+    {
+        id: 3,
+        text: "Fill in the empty fields with the animals you remembered by first selecting the animal on the keyboard and then tapping the right field."
+    }
+]
+
+const Rules = ({onGoToGame}) => {
     return (
         <div className="rules">
-            <h1 className="instructions">First you get a set of 9 animals.</h1>
-            <Instructions limitForRemembering={limitForRemembering}/>
-            <InstructionAddAnimals/>
+            {instructions.map(instruction => {
+                const {id, text} = instruction
+                return <h1 className="instructions" key={id}>{text}</h1>
+            })}
+
             <button className="home_screen_button" onClick={onGoToGame}>Got it! Take me <br/> to the game!</button>
         </div>
     );

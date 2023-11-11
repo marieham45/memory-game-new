@@ -9,18 +9,13 @@ import ResetButton from "./ResetButton";
 import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
 import Verdict from "./Verdict";
-import Penguin from "./Penguin";
-import Instructions from "./Instructions";
-import Title from "./Title";
 import HomeScreen from "./HomeScreen";
-import Rules from "./Rules";
 
 const App = () => {
-    const limitForRemembering = 10;
-    const limitForPlayerInput = 20;
+    const [limitForRemembering, setLimitForRemembering] = useState(10)
+    const [limitForPlayerInput, setLimitForPlayerInput] = useState(20)
 
     const [showHomeScreen, setShowHomeScreen] = useState(true)
-    const [showRules, setShowRules] = useState(false)
     const [isGameOn, setGameOn] = useState(false);
     const [showGameRules, setShowGameRules] = useState(false);
     const [showHeading, setShowHeading] = useState(true);
@@ -131,12 +126,11 @@ const App = () => {
 
     const handleGoToGame = () => {
         setShowHomeScreen(false)
-        setShowRules(false)
     }
+
     return <div className="app">
-        {showHomeScreen && !showRules && <HomeScreen onGoToGame={handleGoToGame} setShowRules={() => setShowRules(true)}/>}
-        {showRules && <Rules limitForRemembering={limitForRemembering} onGoToGame={handleGoToGame}/>}
-        {!showHomeScreen && !showRules &&
+        {showHomeScreen && <HomeScreen/>}
+        {!showHomeScreen &&
         <>
             <Header isGameOn={isGameOn} showGameRules={showGameRules} limitForPlayerInput={limitForPlayerInput} showHeading={showHeading} showResult={showResult}
                     limitForRemembering={limitForRemembering} skillEvaluation={skillEvaluation}/>
