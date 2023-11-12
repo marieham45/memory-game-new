@@ -138,7 +138,7 @@ const App = () => {
 
 
     return <div className="app">
-        // showing home screen
+        {/*showing home screen*/}
         {!showGameRestartOptions && showHomeScreen &&
             <HomeScreen setLimitForRemembering={setLimitForRemembering}
                         limitForRemembering={limitForRemembering}
@@ -149,7 +149,7 @@ const App = () => {
                         onReturn={onReturn}
             />}
 
-        // game is on
+        {/*game is on*/}
         {!showGameRestartOptions && !showHomeScreen &&
             <>
                 <Header showCountdown={showCountdown}
@@ -175,7 +175,7 @@ const App = () => {
             </>
         }
 
-        // game restart options
+        {/*game restart options*/}
         {showGameRestartOptions && !showHomeScreen && <GameRestart onTryAgain={handleTryAgain}
                                                                    setOnReturn={setOnReturn}
                                                                    setShowHomeScreen={setShowHomeScreen}
