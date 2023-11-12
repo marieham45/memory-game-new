@@ -1,8 +1,7 @@
 import Countdown from "./Countdown";
 import Result from "./Result";
-import {useState} from "react";
 
-const Header = ({ showGameRules, limitForPlayerInput, showResult, skillEvaluation}) => {
+const Header = ({ showCountdown, limitForPlayerInput, showResult, skillEvaluation}) => {
 
     let skillEvaluationColorClassName = ""
     switch(skillEvaluation) {
@@ -27,7 +26,7 @@ const Header = ({ showGameRules, limitForPlayerInput, showResult, skillEvaluatio
     return (
         <header className={`header ${skillEvaluationColorClassName && skillEvaluationColorClassName}`}>
             {showResult && <Result skillEvaluation={skillEvaluation}/>}
-            {showGameRules && <Countdown limitForPlayerInput={limitForPlayerInput}/>}
+            {showCountdown && <Countdown limitForPlayerInput={limitForPlayerInput}/>}
         </header>
     );
 };

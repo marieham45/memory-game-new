@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResetButton = ({setShowGameRestartOptions, onReset}) => {
+const Reset = ({setShowGameRestartOptions, onReset}) => {
     return (
         <div>
             <button className="reset_btn" onClick={() => setShowGameRestartOptions(true)}>
@@ -17,4 +17,4 @@ const ResetButton = ({setShowGameRestartOptions, onReset}) => {
     );
 };
 
-export default ResetButton;
+export default Reset;

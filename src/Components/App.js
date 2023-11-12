@@ -4,7 +4,7 @@ import Header from "./Header";
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import ResultButton from "./ResultButton";
-import ResetButton from "./ResetButton";
+import Reset from "./Reset";
 import GridPlayer from "./GridPlayer";
 import GridResult from "./GridResult";
 import Verdict from "./Verdict";
@@ -16,7 +16,7 @@ const App = () => {
     const [limitForPlayerInput, setLimitForPlayerInput] = useState(0)
 
     const [showHomeScreen, setShowHomeScreen] = useState(true)
-    const [showGameRules, setShowGameRules] = useState(false);
+    const [showCountdown, setShowCountdown] = useState(false);
     const [showResult, setShowResult] = useState(false);
     const [animalsToRemember, setAnimalsToRemember] = useState([]);
     const [showAnimalsToRemember, setShowAnimalsToRemember] = useState(false);
@@ -43,25 +43,25 @@ const App = () => {
         });
 
         setTimeout(() => {
-            setShowGameRules(true);
+            setShowCountdown(true);
             setShowAnimalsToRemember(false);
         }, limitForRemembering * 1000);
     }
 
     useEffect(() => {
-        if (showGameRules) {
+        if (showCountdown) {
             timeoutRef.current = setTimeout(() => {
                 handleResult();
                 timeoutRef.current = null;
             }, limitForPlayerInput * 1000);
         } else {
-            // Clear the timeout if showGameRules becomes false
+            // Clear the timeout if showCountdown becomes false
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
                 timeoutRef.current = null;
             }
         }
-    }, [showGameRules]);
+    }, [showCountdown]);
 
     // Update the playerInputRef when playerInput changes
     useEffect(() => {
@@ -70,7 +70,7 @@ const App = () => {
 
     const handleResult = () => {
         setShowResult(true);
-        setShowGameRules(false);
+        setShowCountdown(false);
 
         // Access playerInput from the ref
         const currentPlayerInput = playerInputRef.current;
@@ -110,7 +110,7 @@ const App = () => {
     }
 
     const resetGameWithSameLevel = () => {
-        setShowGameRules(false);
+        setShowCountdown(false);
         setShowResult(false);
         setShowAnimalsToRemember(false)
         setAnimalsToRemember([]);
@@ -138,29 +138,44 @@ const App = () => {
 
 
     return <div className="app">
+        // showing home screen
         {!showGameRestartOptions && showHomeScreen &&
-            <HomeScreen setLimitForRemembering={setLimitForRemembering} limitForRemembering={limitForRemembering}
-                        setLimitForPlayerInput={setLimitForPlayerInput} limitForPlayerInput={limitForPlayerInput}
-                        setShowHomeScreen={setShowHomeScreen} onGameStart={handleGameStart} onReturn={onReturn}
+            <HomeScreen setLimitForRemembering={setLimitForRemembering}
+                        limitForRemembering={limitForRemembering}
+                        setLimitForPlayerInput={setLimitForPlayerInput}
+                        limitForPlayerInput={limitForPlayerInput}
+                        setShowHomeScreen={setShowHomeScreen}
+                        onGameStart={handleGameStart}
+                        onReturn={onReturn}
             />}
+
+        // game is on
         {!showGameRestartOptions && !showHomeScreen &&
             <>
-                <Header showGameRules={showGameRules} limitForPlayerInput={limitForPlayerInput} showResult={showResult}
+                <Header showCountdown={showCountdown}
+                        limitForPlayerInput={limitForPlayerInput}
+                        showResult={showResult}
                         skillEvaluation={skillEvaluation}/>
-                {(!showGameRules && !showResult) &&
+                {!showCountdown && !showResult &&
                     <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
-                {showGameRules && <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>}
-                {(!showGameRules && showResult) &&
-                    <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>}
-                {showGameRules && <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>}
-                {showGameRules && <ResultButton onResult={handleResult}/>}
-                {showResult &&
+                {showCountdown && !showResult &&
                     <>
+                        <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>
+                        <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>
+                        <ResultButton onResult={handleResult}/>
+                    </>
+                }
+                {!showCountdown && showResult &&
+                    <>
+                        <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>
                         <Verdict correctCount={correctCount}/>
-                        <ResetButton onReset={handleReset} setShowGameRestartOptions={setShowGameRestartOptions}/>
-                    </>}
+                        <Reset onReset={handleReset} setShowGameRestartOptions={setShowGameRestartOptions}/>
+                    </>
+                }
             </>
         }
+
+        // game restart options
         {showGameRestartOptions && !showHomeScreen && <GameRestart onTryAgain={handleTryAgain}
                                                                    setOnReturn={setOnReturn}
                                                                    setShowHomeScreen={setShowHomeScreen}
