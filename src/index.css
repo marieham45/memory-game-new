@@ -22,6 +22,8 @@ body {
     text-align: center;
 }
 
+/* HOME SCREEN */
+
 .home_screen {
     text-align: center;
 }
@@ -46,14 +48,6 @@ body {
     background-color: #874c62;
 }
 
-.ready_button {
-    background-color: #80b5ea;
-    display: block;
-    font-size: 20px;
-    margin: 50px auto;
-    padding: 10px;
-    width: 200px;
-}
 
 .rules {
     margin-top: 80px;
@@ -78,6 +72,8 @@ body {
     }
 }
 
+/* GAME */
+
 /* HEADER */
 
 .header {
@@ -95,11 +91,6 @@ body {
     font-size: 1.4rem;
 }
 
-.instructionAnimals {
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-}
 
 .countdown {
     margin-top: 15px;
@@ -115,7 +106,7 @@ body {
     margin: 0;
 }
 
-/* MRIZKA */
+/* GRID */
 
 .grid {
     display: grid;
@@ -299,7 +290,7 @@ body {
 }
 
 
-/* VYSLEDEK */
+/* RESULT */
 
 .verdict {
     margin-top: 50px;
@@ -333,6 +324,12 @@ body {
     color: goldenrod;
 }
 
+/* GAME RESTART */
+
+
+
+
+/* ************************************ */
 
 /* MEDIA QUERIES */
 

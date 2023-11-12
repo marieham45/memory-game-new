@@ -1,15 +1,16 @@
 import {useEffect, useState, useRef} from "react";
 import {animals} from "../Data";
-import Header from "./Header";
-import Grid from "./Grid";
-import Keyboard from "./Keyboard";
-import ResultButton from "./ResultButton";
-import Reset from "./Reset";
-import GridPlayer from "./GridPlayer";
-import GridResult from "./GridResult";
-import Verdict from "./Verdict";
-import HomeScreen from "./HomeScreen";
-import GameRestart from "./GameRestart";
+import Header from "./Game/Header";
+import Grid from "./Game/Grid";
+import Keyboard from "./Game/Keyboard";
+import ResultButton from "./Buttons/ResultButton";
+import Reset from "./Game/Reset";
+import GridPlayer from "./Game/GridPlayer";
+import GridResult from "./Game/GridResult";
+import Verdict from "./Game/Verdict";
+import HomeScreen from "./HomeScreen/HomeScreen";
+import GameRestart from "./GameRestart/GameRestart";
+import Game from "./Game/Game";
 
 const App = () => {
     const [limitForRemembering, setLimitForRemembering] = useState(0)
@@ -152,26 +153,22 @@ const App = () => {
         {/*game is on*/}
         {!showGameRestartOptions && !showHomeScreen &&
             <>
-                <Header showCountdown={showCountdown}
-                        limitForPlayerInput={limitForPlayerInput}
-                        showResult={showResult}
-                        skillEvaluation={skillEvaluation}/>
-                {!showCountdown && !showResult &&
-                    <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
-                {showCountdown && !showResult &&
-                    <>
-                        <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>
-                        <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>
-                        <ResultButton onResult={handleResult}/>
-                    </>
-                }
-                {!showCountdown && showResult &&
-                    <>
-                        <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>
-                        <Verdict correctCount={correctCount}/>
-                        <Reset onReset={handleReset} setShowGameRestartOptions={setShowGameRestartOptions}/>
-                    </>
-                }
+                <Game showCountdown={showCountdown}
+                      limitForPlayerInput={limitForPlayerInput}
+                      showResult={showResult}
+                      skillEvaluation={skillEvaluation}
+                      animalsToRemember={animalsToRemember}
+                      showAnimalsToRemember={showAnimalsToRemember}
+                      setKeyboardValue={setKeyboardValue}
+                      keyboardValue={keyboardValue}
+                      setPlayerInput={setPlayerInput}
+                      playerInput={playerInput}
+                      onResult={handleResult}
+                      resultAnimals={resultAnimals}
+                      correctCount={correctCount}
+                      setShowGameRestartOptions={setShowGameRestartOptions}
+                      onReset={handleReset}
+                />
             </>
         }
 

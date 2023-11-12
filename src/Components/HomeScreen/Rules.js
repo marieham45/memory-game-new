@@ -1,4 +1,5 @@
 import React from 'react';
+import HomeScreenButton from "../Buttons/HomeScreenButton";
 
 const instructions = [
     {
@@ -27,7 +28,7 @@ const Rules = ({onGoToGame}) => {
                 return <h1 className="instructions" key={id}>{text}</h1>
             })}
 
-            <button className="home_screen_button" onClick={onGoToGame}>Got it! Take me <br/> to the game!</button>
+            <HomeScreenButton onClick={onGoToGame}>Got it! Take me <br/> to the game!</HomeScreenButton>
         </div>
     );
 };

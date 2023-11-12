@@ -3,6 +3,7 @@ import Penguin from "./Penguin";
 import Rules from "./Rules";
 import {useState} from "react";
 import Levels from "./Levels";
+import HomeScreenButton from "../Buttons/HomeScreenButton";
 
 const HomeScreen = ({
                         setLimitForRemembering, limitForRemembering, setLimitForPlayerInput, limitForPlayerInput,
@@ -22,10 +23,8 @@ const HomeScreen = ({
                 <>
                     <Title/>
                     <Penguin/>
-                    <button className="home_screen_button"
-                            onClick={() => setShowRules(true)}>What are <br/> the rules?
-                    </button>
-                    <button className="home_screen_button" onClick={handleGoToGame}>Take me to <br/> the game!</button>
+                    <HomeScreenButton onClick={() => setShowRules(true)}>What are <br/> the rules?</HomeScreenButton>
+                    <HomeScreenButton onClick={handleGoToGame}>Take me to <br/> the game!</HomeScreenButton>
                 </>
             }
             {!showRules && showLevels &&

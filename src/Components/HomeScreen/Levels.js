@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import HomeScreenButton from "../Buttons/HomeScreenButton";
+import LevelButton from "../Buttons/LevelButton";
 
 const Levels = ({
                     setLimitForRemembering,
@@ -39,18 +41,14 @@ const Levels = ({
         <div>
             {levels.map(level => {
                 const {id, title, limitForRemembering, limitForPlayerInput} = level
-                return <button className="level_button" key={id}
-                               onClick={() => onLevelSelect(limitForRemembering, limitForPlayerInput)}>{title}
-                </button>
-
+                return <LevelButton key={id} onClick={() => onLevelSelect(limitForRemembering, limitForPlayerInput)}>{title}</LevelButton>
 
             })}
             {showRules &&
                 <>
                     <p>{limitForRemembering} seconds to remember, <br/> {limitForPlayerInput} seconds to complete the
                         challenge</p>
-                    <button className="ready_button" onClick={onGameStart}>I'm ready, let's start!</button>
-
+                    <HomeScreenButton onClick={onGameStart}>I'm ready, let's start!</HomeScreenButton>
                 </>
             }
         </div>
