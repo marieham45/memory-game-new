@@ -7,7 +7,7 @@ import HomeScreenButton from "../Buttons/HomeScreenButton";
 
 const HomeScreen = ({
                         setLimitForRemembering, limitForRemembering, setLimitForPlayerInput, limitForPlayerInput,
-                        onGameStart, onReturn
+                        onGameStart, onReset, onReturn
                     }) => {
     const [showRules, setShowRules] = useState(false)
     const [showLevels, setShowLevels] = useState(onReturn)
@@ -30,7 +30,7 @@ const HomeScreen = ({
             {!showRules && showLevels &&
                 <Levels setLimitForRemembering={setLimitForRemembering} limitForRemembering={limitForRemembering}
                         setLimitForPlayerInput={setLimitForPlayerInput} limitForPlayerInput={limitForPlayerInput}
-                        onGameStart={onGameStart}
+                        onReset={onReset} onGameStart={onGameStart} setShowRules={setShowRules} setShowLevels={setShowLevels}
                 />
             }
             {showRules && <Rules onGoToGame={handleGoToGame}/>}

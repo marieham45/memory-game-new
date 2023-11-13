@@ -147,6 +147,7 @@ const App = () => {
                         limitForPlayerInput={limitForPlayerInput}
                         setShowHomeScreen={setShowHomeScreen}
                         onGameStart={handleGameStart}
+                        onReset={handleReset}
                         onReturn={onReturn}
             />}
 

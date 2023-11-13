@@ -1,4 +1,3 @@
-import React from 'react';
 import ResetButton from "../Buttons/ResetButton";
 
 const Reset = ({setShowGameRestartOptions, onReset}) => {

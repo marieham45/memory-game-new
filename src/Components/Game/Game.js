@@ -37,7 +37,7 @@ const Game = ({
             {showCountdown && !showResult &&
                 <>
                     <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>
-                    <Keyboard data={animals} setKeyboardValue={setKeyboardValue}/>
+                    <Keyboard data={animals} setKeyboardValue={setKeyboardValue} keyboardValue={keyboardValue}/>
                     <ResultButton onResult={onResult}/>
                 </>
             }

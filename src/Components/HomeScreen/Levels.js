@@ -1,15 +1,19 @@
 import {useState} from 'react';
 import LevelButton from "../Buttons/LevelButton";
 import StartButton from "../Buttons/StartButton";
+import ResetButton from "../Buttons/ResetButton";
 
 const Levels = ({
                     setLimitForRemembering,
                     limitForRemembering,
                     setLimitForPlayerInput,
                     limitForPlayerInput,
-                    onGameStart
+                    onGameStart,
+                    onReset,
+                    setShowLevels,
+                    setShowRules
                 }) => {
-    const [showRules, setShowRules] = useState(false)
+    const [showRulesDetail, setShowRulesDetail] = useState(false)
     const [limitColor, setLimitColor] = useState("")
 
     const levels = [
@@ -40,7 +44,7 @@ const Levels = ({
     ]
 
     const handleLevelSelect = (limitForRemembering, limitForPlayerInput, colorCode) => {
-        setShowRules(true)
+        setShowRulesDetail(true)
         setLimitForRemembering(limitForRemembering)
         setLimitForPlayerInput(limitForPlayerInput)
         setLimitColor(colorCode)
@@ -49,10 +53,11 @@ const Levels = ({
         <div>
             {levels.map(level => {
                 const {id, title, limitForRemembering, limitForPlayerInput, color, colorCode} = level
-                return <LevelButton color={color} key={id} onClick={() => handleLevelSelect(limitForRemembering, limitForPlayerInput, colorCode)}>{title}</LevelButton>
+                return <LevelButton color={color} key={id} onClick={() => handleLevelSelect(limitForRemembering, limitForPlayerInput, colorCode)}>{title}
+                </LevelButton>
 
             })}
-            {showRules &&
+            {showRulesDetail &&
                 <>
                     <p className="level_limits"><span style={{color: limitColor, fontWeight: "bold"}}>{limitForRemembering}</span> seconds to remember, <br/>
                         <span style={{color: limitColor, fontWeight: "bold"}}>{limitForPlayerInput}</span> seconds to complete the
@@ -60,6 +65,11 @@ const Levels = ({
                     <StartButton onClick={onGameStart}>I'm ready, let's start!</StartButton>
                 </>
             }
+            <ResetButton onClick={() => {
+                onReset()
+                setShowRules(false)
+                setShowLevels(false)
+            }}>Back to homepage</ResetButton>
         </div>
     );
 };
