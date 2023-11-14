@@ -62,7 +62,7 @@ const Levels = ({
                     <p className="level_limits"><span style={{color: limitColor, fontWeight: "bold"}}>{limitForRemembering}</span> seconds to remember, <br/>
                         <span style={{color: limitColor, fontWeight: "bold"}}>{limitForPlayerInput}</span> seconds to complete the
                         challenge</p>
-                    <StartButton onClick={onGameStart}>I'm ready, let's start!</StartButton>
+                    <StartButton onClick={onGameStart}>START</StartButton>
                 </>
             }
             <ResetButton onClick={() => {

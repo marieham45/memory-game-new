@@ -23,14 +23,18 @@ const GameRestart = ({
     }
 
     return (
-        <div>
-            <LevelButton onClick={onTryAgain}>Same level</LevelButton>
-            <LevelButton onClick={handleDifferentLevel}>Different level</LevelButton>
+        <>
+            <div className="game_restart">
+                <LevelButton onClick={onTryAgain}>Same level</LevelButton>
+                <LevelButton onClick={handleDifferentLevel}>Different level</LevelButton>
 
+
+            </div>
             <ResetButton onClick={handleBackToResult}>Back to result</ResetButton>
+        </>
 
-        </div>
-    );
+
+);
 };
 
 export default GameRestart;

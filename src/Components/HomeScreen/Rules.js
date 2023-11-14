@@ -45,17 +45,22 @@ const Rules = ({onGoToGame}) => {
 
             <div className="rules_instructions">
                 <h2>Step {step}</h2>
-                <div className="instruction_box">
-                    <h2 className="instructions">{instructions[step - 1]?.text}</h2>
-                    <img className="instructions_img" src={instructions[step - 1]?.image} alt='instruction_ilustration'/>
+                <div className="rules_box">
+                    <button className="step_button" onClick={handlePrevious}>‹</button>
+                    <div className="instruction_box">
+                        <h3 className="instructions">{instructions[step - 1]?.text}</h3>
+                        <img className="instructions_img" src={instructions[step - 1]?.image} alt='instruction_ilustration'/>
+                    </div>
+                    <button className="step_button" onClick={handleNext}>›</button>
                 </div>
 
+
             </div>
 
-            <div className="steps">
-                <button className="step_button" onClick={handlePrevious}>‹</button>
-                <button className="step_button" onClick={handleNext}>›</button>
-            </div>
+            {/*<div className="steps">*/}
+            {/*    <button className="step_button" onClick={handlePrevious}>‹</button>*/}
+            {/*    <button className="step_button" onClick={handleNext}>›</button>*/}
+            {/*</div>*/}
 
 
             {step === 4 && <ReadyButton onClick={onGoToGame}>Got it! Take me <br/> to the game!</ReadyButton>}
