@@ -1,13 +1,5 @@
 import {useEffect, useState, useRef} from "react";
 import {animals} from "../Data";
-import Header from "./Game/Header";
-import Grid from "./Game/Grid";
-import Keyboard from "./Game/Keyboard";
-import ResultButton from "./Buttons/ResultButton";
-import Reset from "./Game/Reset";
-import GridPlayer from "./Game/GridPlayer";
-import GridResult from "./Game/GridResult";
-import Verdict from "./Game/Verdict";
 import HomeScreen from "./HomeScreen/HomeScreen";
 import GameRestart from "./GameRestart/GameRestart";
 import Game from "./Game/Game";

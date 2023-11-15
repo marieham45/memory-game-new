@@ -57,14 +57,18 @@ const Levels = ({
                 </LevelButton>
 
             })}
-            {showRulesDetail &&
-                <>
+
+                <div className="level_description">
+                    {showRulesDetail &&
+                        <>
                     <p className="level_limits"><span style={{color: limitColor, fontWeight: "bold"}}>{limitForRemembering}</span> seconds to remember, <br/>
                         <span style={{color: limitColor, fontWeight: "bold"}}>{limitForPlayerInput}</span> seconds to complete the
                         challenge</p>
                     <StartButton onClick={onGameStart}>START</StartButton>
-                </>
-            }
+                        </>
+                    }
+                </div>
+
             <ResetButton onClick={() => {
                 onReset()
                 setShowRules(false)
