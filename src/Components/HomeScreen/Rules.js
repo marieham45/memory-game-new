@@ -49,7 +49,7 @@ const Rules = ({onGoToGame}) => {
                         <h3 className="instructions">{instructions[step - 1]?.text}</h3>
                             <div className="illustration_box">
                                 {step === 1 && <>
-                                    <button className="level_button level_button_illustration green_level" disabled>Beginner</button>
+                                    <button className="level_button level_button_illustration green_level_illustration" disabled>Beginner</button>
                                     <button className="level_button level_button_illustration" disabled>Advanced</button>
                                     <button className="level_button level_button_illustration" disabled>Hardcore</button>
                                 </>}
