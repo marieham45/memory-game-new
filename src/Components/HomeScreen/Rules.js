@@ -1,28 +1,27 @@
 import React, {useState} from 'react';
 import ReadyButton from "../Buttons/ReadyButton";
+import Grid from "../Game/Grid";
+import GridField from "../Game/GridField";
 
 const instructions = [
     {
         id: 0,
         text: "Select your level.",
-        image: process.env.PUBLIC_URL + "/images/select_level.jpg"
     },
     {
         id: 1,
         text: "Click the start button to launch the game.",
-        image: process.env.PUBLIC_URL + "/images/start_game.jpg"
     },
     {
         id: 2,
         text: "Try to remember as many animals as possible within the given time limit.",
-        image: process.env.PUBLIC_URL + "/images/remember_animals.jpg"
     },
     {
         id: 3,
         text: "Select the animal on the keyboard and then tap the right field to complete the challenge.",
-        image: process.env.PUBLIC_URL + "/images/fill_in.jpg"
     }
 ]
+
 
 const Rules = ({onGoToGame}) => {
     const [step, setStep] = useState(1);
@@ -48,15 +47,57 @@ const Rules = ({onGoToGame}) => {
                     <button className={`step_button ${step === 1 ? "hidden" : ""}`} onClick={handlePrevious}>‹</button>
                     <div className="instruction_box">
                         <h3 className="instructions">{instructions[step - 1]?.text}</h3>
-                        <img className="instructions_img" src={instructions[step - 1]?.image} alt='instruction_ilustration'/>
+                            <div className="illustration_box">
+                                {step === 1 && <>
+                                    <button className="level_button level_button_illustration green_level" disabled>Beginner</button>
+                                    <button className="level_button level_button_illustration" disabled>Advanced</button>
+                                    <button className="level_button level_button_illustration" disabled>Hardcore</button>
+                                </>}
+                                {step === 2 && <>
+                                    <p className="level_limits_illustration"><span style={{color: "#3D8361", fontWeight: "bold"}}>20</span> seconds to remember, <br/>
+                                        <span style={{color: "#3D8361", fontWeight: "bold"}}>30</span> seconds to complete the
+                                        challenge</p>
+                                    <button className="start_button start_button_illustration" disabled>START</button>
+                                </>}
+                                {step === 3 && <>
+                                    <div className="grid grid_illustration">
+                                        <div className="grid_field grid_field_illustration">🐳</div>
+                                        <div className="grid_field grid_field_illustration">🦘</div>
+                                        <div className="grid_field grid_field_illustration">🦭</div>
+                                        <div className="grid_field grid_field_illustration">🐘</div>
+                                        <div className="grid_field grid_field_illustration">🐒</div>
+                                        <div className="grid_field grid_field_illustration">🦥</div>
+                                        <div className="grid_field grid_field_illustration">🐘</div>
+                                        <div className="grid_field grid_field_illustration">🦔</div>
+                                        <div className="grid_field grid_field_illustration">🦨</div>
+                                    </div>
+                                </>}
+                                {step === 4 && <>
+                                    <div className="grid grid_illustration">
+                                        <div className="grid_field grid_field_illustration"></div>
+                                        <div className="grid_field grid_field_illustration"><span className="appear1">🦘</span></div>
+                                        <div className="grid_field grid_field_illustration"></div>
+                                        <div className="grid_field grid_field_illustration"><span className="appear3">🐘</span></div>
+                                        <div className="grid_field grid_field_illustration"></div>
+                                        <div className="grid_field grid_field_illustration"><span className="appear2">🦥</span></div>
+                                        <div className="grid_field grid_field_illustration"></div>
+                                        <div className="grid_field grid_field_illustration"></div>
+                                        <div className="grid_field grid_field_illustration"></div>
+                                    </div>
+                                </>}
+                            </div>
+
                     </div>
-                    <button className={`step_button ${step === instructions.length ? "hidden" : ""}`} onClick={handleNext}>›</button>
+                    <button className={`step_button ${step === instructions.length ? "hidden" : ""}`}
+                            onClick={handleNext}>›
+                    </button>
                 </div>
 
 
             </div>
 
-            {step === instructions.length && <ReadyButton onClick={onGoToGame}>Got it! Take me <br/> to the game!</ReadyButton>}
+            {step === instructions.length &&
+                <ReadyButton onClick={onGoToGame}>Got it! Take me <br/> to the game!</ReadyButton>}
         </div>
     );
 };

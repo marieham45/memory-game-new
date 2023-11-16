@@ -89,8 +89,37 @@ body {
     background-color: cornflowerblue;
 }
 
+.level_button_illustration {
+    font-size: 15px;
+    width: 150px;
+    padding: 10px 30px;
+    margin-top: 10px;
+}
+
+.green_level {
+    color: white;
+    background-color: #3D8361;
+    animation: colorChange 4.5s infinite;
+}
+
+@keyframes colorChange {
+    0%, 100% {
+        background-color: white;
+        color: #666666;
+    }
+    33.33%, 66.66% {
+        background-color: #3D8361;
+        color: white;
+    }
+}
+
 .level_limits {
     font-size: 20px;
+}
+
+.level_limits_illustration {
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 
@@ -117,6 +146,11 @@ body {
     height: 430px;
     margin: 5px 20px;
     width: 300px;
+}
+
+.illustration_box {
+    background-color: #191919;
+    padding: 10px;
 }
 
 .instructions_img {
@@ -199,6 +233,12 @@ body {
     }
 }
 
+.start_button_illustration {
+    font-size: 15px;
+    padding: 15px 40px;
+    margin-top: 40px;
+}
+
 
 /* PENGUIN */
 
@@ -256,6 +296,11 @@ body {
     margin-top: 0;
 }
 
+.grid_illustration {
+    grid-template-columns: repeat(3, 67px);
+
+}
+
 
 .grid_field {
     width: 95px;
@@ -277,6 +322,43 @@ body {
         transform: scale(100%);
     }
 }
+
+.grid_field_illustration {
+    width: 67px;
+    height: 67px;
+    font-size: 42px;
+    animation: none;
+
+}
+
+.appear1 {
+    animation: appear 1s;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+}
+
+.appear2 {
+    animation: appear 1s ease-in-out 1.5s 1;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+}
+
+.appear3 {
+    animation: appear 1s ease-in-out 2.25s 1;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+}
+
+@keyframes appear {
+    99% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
+}
+
+
 
 /* BUTTONS */
 
