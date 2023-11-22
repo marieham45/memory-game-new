@@ -153,10 +153,6 @@ body {
     padding: 10px;
 }
 
-.instructions_img {
-    max-width: 240px;
-}
-
 .instructions {
     color: black;
     margin-top: 20px;
@@ -165,9 +161,18 @@ body {
     font-size: 1.4rem;
 }
 
-.steps {
-    display: flex;
-    justify-content: space-around;
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.red_dot {
+    background-color: cornflowerblue;
 }
 
 .step_button {
@@ -552,10 +557,7 @@ body {
     .instruction_box {
         height: 360px;
         width: 250px;
-    }
-
-    .instructions_img {
-        max-width: 200px;
+        margin: 10px;
     }
 
 
@@ -571,6 +573,11 @@ body {
         width: 170px;
         padding: 12px 20px;
         margin: 42px auto;
+    }
+
+    .level_button.level_button_illustration {
+        font-size: 12px;
+        margin-bottom: 20px;
     }
 
     .level_limits {
@@ -590,6 +597,17 @@ body {
         height: 78px;
         width: 78px;
         font-size: 45px;
+    }
+
+    .grid.grid_illustration {
+        grid-template-columns: repeat(3, 60px);
+
+    }
+
+    .grid_field.grid_field_illustration {
+        height: 60px;
+        width: 60px;
+        font-size: 38px;
     }
 
     .penguin {
@@ -636,6 +654,7 @@ body {
     }
 }
 
+/* iPhone 4*/
 @media (max-width: 320px) and (max-height: 480px) {
 
     .home_screen_button {
@@ -656,16 +675,13 @@ body {
     }
 
     .instruction_box {
-        height: 280px;
+        height: 300px;
     }
 
     .instructions {
         margin: 0;
     }
 
-    .instructions_img {
-        max-width: 160px;
-    }
 
     .level_button {
         text-align: center;
@@ -674,6 +690,8 @@ body {
         padding: 10px 18px;
         margin: 32px auto;
     }
+
+
 
     .level_limits {
         font-size: 16px;
@@ -697,6 +715,17 @@ body {
         height: 70px;
         width: 70px;
         font-size: 45px;
+    }
+
+    .grid.grid_illustration {
+        grid-template-columns: repeat(3, 50px);
+
+    }
+
+    .grid_field.grid_field_illustration {
+        height: 50px;
+        width: 50px;
+        font-size: 32px;
     }
 
     .result {
@@ -751,7 +780,27 @@ body {
     }
 
     .instructions {
-        font-size: 3rem;
+        font-size: 1.5rem;
+    }
+
+    .instruction_box {
+        height: 450px;
+    }
+
+    .illustration_box {
+        height: 270px;
+    }
+
+    .grid.grid_illustration {
+        grid-template-columns: repeat(3, 67px);
+        margin-top: 20px;
+
+    }
+
+    .grid_field.grid_field_illustration {
+        width: 67px;
+        height: 67px;
+        font-size: 42px;
     }
 
     .countdown {

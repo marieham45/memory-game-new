@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import ReadyButton from "../Buttons/ReadyButton";
-import Grid from "../Game/Grid";
-import GridField from "../Game/GridField";
 
 const instructions = [
     {
@@ -42,7 +40,10 @@ const Rules = ({onGoToGame}) => {
         <div className="rules">
 
             <div className="rules_instructions">
-                <h2>Step {step}</h2>
+                <div className={`dot ${step === 1 ? "red_dot" : ""}`} ></div>
+                <div className={`dot ${step === 2 ? "red_dot" : ""}`} ></div>
+                <div className={`dot ${step === 3 ? "red_dot" : ""}`} ></div>
+                <div className={`dot ${step === 4 ? "red_dot" : ""}`} ></div>
                 <div className="rules_box">
                     <button className={`step_button ${step === 1 ? "hidden" : ""}`} onClick={handlePrevious}>‹</button>
                     <div className="instruction_box">
