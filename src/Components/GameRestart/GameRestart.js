@@ -7,14 +7,14 @@ const GameRestart = ({
                          setOnReturn,
                          setShowHomeScreen,
                          setShowGameRestartOptions,
-                         resetGameWithSameLevel
+                         onResetGameWithSameLevel
                      }) => {
 
     const handleDifferentLevel = () => {
         setOnReturn(true)
         setShowHomeScreen(true)
         setShowGameRestartOptions(false)
-        resetGameWithSameLevel()
+        onResetGameWithSameLevel()
     }
 
     const handleBackToResult = () => {

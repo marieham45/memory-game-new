@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "./Header";
 import Grid from "./Grid";
 import GridPlayer from "./GridPlayer";
@@ -8,6 +8,7 @@ import ResultButton from "../Buttons/ResultButton";
 import GridResult from "./GridResult";
 import Verdict from "./Verdict";
 import Reset from "./Reset";
+import Stats from "./Stats";
 
 const Game = ({
                   showCountdown,
@@ -26,28 +27,32 @@ const Game = ({
                   setShowGameRestartOptions,
                   onReset
               }) => {
+
+    const [showStats, setShowStats] = useState(false)
+
     return (
         <div>
-            <Header showCountdown={showCountdown}
-                    limitForPlayerInput={limitForPlayerInput}
-                    showResult={showResult}
-                    skillEvaluation={skillEvaluation}/>
-            {!showCountdown && !showResult &&
+            {!showStats && <Header showCountdown={showCountdown}
+                     limitForPlayerInput={limitForPlayerInput}
+                     showResult={showResult}
+                     skillEvaluation={skillEvaluation}/>}
+            {!showStats && !showCountdown && !showResult &&
                 <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
-            {showCountdown && !showResult &&
+            {!showStats && showCountdown && !showResult &&
                 <>
                     <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>
                     <Keyboard data={animals} setKeyboardValue={setKeyboardValue} keyboardValue={keyboardValue}/>
                     <ResultButton onResult={onResult}/>
                 </>
             }
-            {!showCountdown && showResult &&
+            {!showStats && !showCountdown && showResult &&
                 <>
                     <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>
                     <Verdict correctCount={correctCount}/>
-                    <Reset onReset={onReset} setShowGameRestartOptions={setShowGameRestartOptions}/>
+                    <Reset onReset={onReset} setShowGameRestartOptions={setShowGameRestartOptions} setShowStats={setShowStats}/>
                 </>
             }
+            {showStats && <Stats setShowStats={setShowStats}/>}
         </div>
     );
 };
