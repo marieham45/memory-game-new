@@ -65,13 +65,12 @@ body {
     border: 1px solid #dcdcdc;
     display: block;
     cursor: pointer;
-    color: #666666;
+    color: black;
     font-family: Arial, serif;
     font-size: 20px;
     font-weight: bold;
     padding: 20px 50px;
     text-decoration: none;
-    text-shadow: 0 1px 0 #ffffff;
 }
 
 .level_button.green_level:focus {
@@ -593,6 +592,10 @@ body {
     background-color: cornflowerblue;
 }
 
+.no_stats {
+    height: 21%;
+}
+
 /* GAME RESTART */
 
 
@@ -860,8 +863,6 @@ body {
         font-size: 11px;
     }
 
-
-
     .stats_level {
         margin-top: 2px;
         margin-bottom: 6px;
@@ -877,10 +878,13 @@ body {
     }
 
 
-
     .column-label p {
         font-size: 8px;
         padding-top: 1px;
+    }
+
+    .no_stats {
+        font-size: 13px;
     }
 }
 
@@ -942,11 +946,23 @@ body {
     .verdict, .correct {
         font-size: 1.5rem;
     }
+
+    .stats {
+        padding: 10px 100px;
+    }
+
+    .stats_button {
+        margin: 1% 100%;
+    }
 }
 
 @media (min-width: 900px) {
 
     .keyboard {
         margin: 0 20% auto 20%;
+    }
+
+    .stats {
+        padding: 10px 200px;
     }
 }
