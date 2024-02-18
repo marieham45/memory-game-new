@@ -1,9 +1,23 @@
-import {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {animals} from "./Data";
 import HomeScreen from "./Components/HomeScreen/HomeScreen";
 import GameRestart from "./Components/GameRestart/GameRestart";
 import Game from "./Components/Game/Game";
 import {useLocalStorage, useReadLocalStorage} from "usehooks-ts";
+import Title from "./Components/HomeScreen/Title";
+import Penguin from "./Components/HomeScreen/Penguin";
+import HomeScreenButton from "./Components/Buttons/HomeScreenButton";
+import Levels from "./Components/HomeScreen/Levels";
+import Rules from "./Components/HomeScreen/Rules";
+import Stats from "./Components/Game/Stats";
+import Header from "./Components/Game/Header";
+import Grid from "./Components/Game/Grid";
+import GridPlayer from "./Components/Game/GridPlayer";
+import Keyboard from "./Components/Game/Keyboard";
+import ResultButton from "./Components/Buttons/ResultButton";
+import GridResult from "./Components/Game/GridResult";
+import Verdict from "./Components/Game/Verdict";
+import Reset from "./Components/Game/Reset";
 
 
 const App = () => {
@@ -22,6 +36,10 @@ const App = () => {
     const [correctCount, setCorrectCount] = useState(0)
     const [showGameRestartOptions, setShowGameRestartOptions] = useState(false)
     const [onReturn, setOnReturn] = useState(false)
+    const [showRules, setShowRules] = useState(false)
+    const [showLevels, setShowLevels] = useState(onReturn)
+    const [showStats, setShowStats] = useState(false)
+
 
     const timeoutRef = useRef(null);
     const playerInputRef = useRef(playerInput);
@@ -34,6 +52,10 @@ const App = () => {
     const [hardcoreCorrectCount, setHardcoreCorrectCount] = useLocalStorage("hardcoreCorrectCount",
         {zero: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0})
 
+    const handleGoToGame = () => {
+        setShowLevels(true)
+        setShowRules(false)
+    }
     const handleStats = (correctCount) => {
         if (limitForRemembering === 20) {
             switch (correctCount) {
@@ -133,7 +155,8 @@ const App = () => {
                 case 9:
                     setHardcoreCorrectCount({...hardcoreCorrectCount, nine: hardcoreCorrectCount.nine + 1})
                     break
-            }}
+            }
+        }
     }
 
     const handleGameStart = () => {
@@ -172,7 +195,6 @@ const App = () => {
     useEffect(() => {
         playerInputRef.current = playerInput;
     }, [playerInput]);
-
 
 
     const handleResult = () => {
@@ -245,48 +267,69 @@ const App = () => {
         setLimitForPlayerInput(0)
         setShowHomeScreen(true)
         setShowGameRestartOptions(false)
+        setShowLevels(false)
     }
 
 
     return <div className="app">
         {/*showing home screen*/}
-        {!showGameRestartOptions && showHomeScreen &&
-            <HomeScreen setLimitForRemembering={setLimitForRemembering}
-                        limitForRemembering={limitForRemembering}
-                        setLimitForPlayerInput={setLimitForPlayerInput}
-                        limitForPlayerInput={limitForPlayerInput}
-                        setShowHomeScreen={setShowHomeScreen}
-                        onGameStart={handleGameStart}
-                        onReset={handleReset}
-                        onReturn={onReturn}
-            />}
+        {showHomeScreen &&
+            <HomeScreen>
+                {!showStats && !showRules && !showLevels &&
+                    <>
+                        <Title/>
+                        <Penguin/>
+                        <HomeScreenButton onClick={() => setShowRules(true)}>What are <br/> the
+                            rules?</HomeScreenButton>
+                        <HomeScreenButton onClick={handleGoToGame}>Take me to <br/> the game!</HomeScreenButton>
+                        <HomeScreenButton onClick={() => setShowStats(true)}>Show my <br/>stats</HomeScreenButton>
+                    </>
+                }
+                {!showStats && !showRules && showLevels &&
+                    <Levels setLimitForRemembering={setLimitForRemembering} limitForRemembering={limitForRemembering}
+                            setLimitForPlayerInput={setLimitForPlayerInput} limitForPlayerInput={limitForPlayerInput}
+                            onReset={handleReset} onGameStart={handleGameStart} setShowRules={setShowRules}
+                            setShowLevels={setShowLevels}
+                    />
+                }
+                {!showStats && showRules && <Rules onGoToGame={handleGoToGame}/>}
+                {showStats && <Stats setShowStats={setShowStats}/>}
+            </HomeScreen>}
 
         {/*game is on*/}
-        {!showGameRestartOptions && !showHomeScreen &&
-            <Game showCountdown={showCountdown}
-                  limitForPlayerInput={limitForPlayerInput}
-                  showResult={showResult}
-                  skillEvaluation={skillEvaluation}
-                  animalsToRemember={animalsToRemember}
-                  showAnimalsToRemember={showAnimalsToRemember}
-                  setKeyboardValue={setKeyboardValue}
-                  keyboardValue={keyboardValue}
-                  setPlayerInput={setPlayerInput}
-                  playerInput={playerInput}
-                  onResult={handleResult}
-                  resultAnimals={resultAnimals}
-                  correctCount={correctCount}
-                  setShowGameRestartOptions={setShowGameRestartOptions}
-                  onReset={handleReset}
-            />
+        {!showHomeScreen &&
+            <Game>
+                {!showGameRestartOptions &&!showStats && <Header showCountdown={showCountdown}
+                                       limitForPlayerInput={limitForPlayerInput}
+                                       showResult={showResult}
+                                       skillEvaluation={skillEvaluation}/>}
+                {!showGameRestartOptions &&!showStats && !showCountdown && !showResult &&
+                    <Grid animalsToRemember={animalsToRemember} showAnimalsToRemember={showAnimalsToRemember}/>}
+                {!showGameRestartOptions &&!showStats && showCountdown && !showResult &&
+                    <>
+                        <GridPlayer keyboardValue={keyboardValue} setPlayerInput={setPlayerInput}/>
+                        <Keyboard data={animals} setKeyboardValue={setKeyboardValue} keyboardValue={keyboardValue}/>
+                        <ResultButton onResult={handleResult}/>
+                    </>
+                }
+                {!showGameRestartOptions &&!showStats && !showCountdown && showResult &&
+                    <>
+                        <GridResult resultAnimals={resultAnimals} playerInput={playerInput}/>
+                        <Verdict correctCount={correctCount}/>
+                        <Reset onReset={handleReset} setShowGameRestartOptions={setShowGameRestartOptions}
+                               setShowStats={setShowStats}/>
+                    </>
+                }
+                {!showGameRestartOptions && showStats && <Stats setShowStats={setShowStats}/>}
+                {showGameRestartOptions && <GameRestart onTryAgain={handleTryAgain}
+                                                                           setOnReturn={setOnReturn}
+                                                                           setShowHomeScreen={setShowHomeScreen}
+                                                                           setShowGameRestartOptions={setShowGameRestartOptions}
+                                                                           onResetGameWithSameLevel={handleResetGameWithSameLevel}/>}
+            </Game>
         }
 
-        {/*game restart options*/}
-        {showGameRestartOptions && !showHomeScreen && <GameRestart onTryAgain={handleTryAgain}
-                                                                   setOnReturn={setOnReturn}
-                                                                   setShowHomeScreen={setShowHomeScreen}
-                                                                   setShowGameRestartOptions={setShowGameRestartOptions}
-                                                                   onResetGameWithSameLevel={handleResetGameWithSameLevel}/>}
+
 
     </div>;
 };
