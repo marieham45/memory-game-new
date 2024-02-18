@@ -222,7 +222,7 @@ body {
     font-weight: bold;
     font-family: Arial, serif;
     padding: 23px 70px;
-    margin: 18px auto 55px auto;
+    margin: 70px auto 55px auto;
     text-decoration: none;
     animation: bigger 1s ease-in-out infinite alternate;
 
@@ -402,10 +402,9 @@ body {
 
 .reset_btn {
     text-align: center;
-    margin-top: 5px;
-    margin-right: 5px;
+    margin: 90px 5px;
     box-shadow: 0 1px 0 0 #1c1b18;
-    background: #eae0c2 linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+    background: white linear-gradient(to bottom, white 5%, whitesmoke 100%);
     border-radius: 15px;
     border: 2px solid #333029;
     display: inline-block;
@@ -657,6 +656,7 @@ body {
 
     .start_button {
         padding: 15px 50px;
+        margin-top: 30px
     }
 
     .grid {
@@ -797,7 +797,7 @@ body {
 
     .start_button {
         padding: 15px 30px;
-        margin-bottom: 35px;
+        margin-bottom: 50px;
     }
 
     .header {
@@ -860,7 +860,7 @@ body {
 
 
     .reset_btn {
-        margin-top: 0;
+        margin-top: 10px;
         font-size: 11px;
     }
 
